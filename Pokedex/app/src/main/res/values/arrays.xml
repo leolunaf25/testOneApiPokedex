@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="generaciones">
+        <item>Primera Generación</item>
+        <item>Segunda Generación</item>
+        <item>Tercera Generación</item>
+        <item>Cuarta Generación</item>
+        <item>Quinta Generación</item>
+        <item>Sexta Generación</item>
+        <item>Séptima Generación</item>
+        <item>Octava Generación</item>
+        <item>Novena Generación</item>
+    </string-array>
+</resources>
