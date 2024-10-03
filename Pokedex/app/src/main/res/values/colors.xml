@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--COLORS POKEDEX-->
-
+    <color name="transparenBackground">#73FFFFFF</color>
 
     <!-- Colores de fondo claros -->
     <color name="background_primary">#090979</color> <!-- Azul claro -->

@@ -48,7 +48,7 @@ class DataPokemonActivity : AppCompatActivity() {
             val type = dataPokemon.body()?.types?.map { it.type.name } ?: emptyList()
 
             runOnUiThread{
-                binding.tvNamePokemon.text = name
+                binding.tvNamePokemon.text = name.uppercase()
                 binding.tvHeight.text = height
                 binding.tvWeight.text = weight
                 binding.tvExperience.text = experience
