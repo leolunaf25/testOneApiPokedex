@@ -21,7 +21,6 @@ class MenuGenerationsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuGenerationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         initRecyclerView()
 
     }

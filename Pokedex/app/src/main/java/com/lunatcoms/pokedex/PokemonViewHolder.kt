@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lunatcoms.pokedex.databinding.ItemPokemonBinding
 import com.squareup.picasso.Picasso
 
-class PokemonViewHolder(view: View) :
+class PokemonViewHolder(view: View, private val onItemSelected: (String) -> Unit) :
     RecyclerView.ViewHolder(view) {
 
     private val binding = ItemPokemonBinding.bind(view)
@@ -19,7 +19,7 @@ class PokemonViewHolder(view: View) :
             .fit()
             .into(binding.ivPokemon)
 
-        //binding.btnGeneration.setOnClickListener { onItemSelected(position.toString()) }
+        binding.btnPokemon.setOnClickListener { onItemSelected(pokemonUrl) }
     }
 
 }

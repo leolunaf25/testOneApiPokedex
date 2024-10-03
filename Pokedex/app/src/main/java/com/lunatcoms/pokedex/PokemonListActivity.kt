@@ -1,11 +1,11 @@
 package com.lunatcoms.pokedex
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lunatcoms.pokedex.databinding.ActivityPokemonListBinding
-import com.lunatcoms.pokedex.menuGenerations.GenerationAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +29,7 @@ class PokemonListActivity : AppCompatActivity() {
         generationName = intent.getStringExtra("GENERATION_NAME") ?: ""
         binding.tvPokemonList.text = generationName
 
-        var (offset, limit) = when (generationName.toInt()) {
+        val (offset, limit) = when (generationName.toInt()) {
             0 -> 0 to 151
             1 -> 151 to 100
             2 -> 251 to 135
@@ -57,7 +57,7 @@ class PokemonListActivity : AppCompatActivity() {
                 if (call.isSuccessful) {
                     Log.i("Status", "Conexion realizada")
 
-                    adapter = PokemonAdapter(pokemon,pokemonUrl)
+                    adapter = PokemonAdapter(pokemon,pokemonUrl){pokeId -> navigateToPokemonData(pokeId)}
                     binding.rvPokemon.layoutManager = LinearLayoutManager(parent)
                     binding.rvPokemon.adapter = adapter
 
@@ -66,6 +66,12 @@ class PokemonListActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun navigateToPokemonData(pokeId: String) {
+        val intent = Intent(this, DataPokemonActivity::class.java)
+        intent.putExtra("ID_POKEMON", pokeId)
+        startActivity(intent)
     }
 
 
