@@ -4,25 +4,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgorundgradientsecondary"
     tools:context=".DataPokemonActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvOne"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="22dp"
+        app:cardCornerRadius="90dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/button_secondary">
+        app:layout_constraintHeight_percent="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvIdPokemon"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:text="Hola"
-            android:gravity="center"
-            android:textSize="80sp"
-            />
+            android:background="@drawable/backgroundgradientprimary">
+
+            <ImageView
+                android:id="@+id/ivMainPoke"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
 
     </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvOne">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNamePokemon"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                tools:text="Charmander" />
+
+            <LinearLayout style="@style/BaseLinearLayoutHorizontal">
+
+                <TextView
+                    style="@style/TextViewStats"
+                    android:text="Experiencia base:" />
+
+                <TextView
+                    android:id="@+id/tvExperience"
+                    style="@style/TextViewDataResponse"
+                    tools:text="64" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/BaseLinearLayoutHorizontal">
+
+                <TextView
+                    style="@style/TextViewStats"
+                    android:text="Altura:" />
+
+                <TextView
+                    android:id="@+id/tvHeight"
+                    style="@style/TextViewDataResponse"
+                    tools:text="7" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/BaseLinearLayoutHorizontal">
+
+                <TextView
+                    style="@style/TextViewStats"
+                    android:text="Peso:" />
+
+                <TextView
+                    android:id="@+id/tvWeight"
+                    style="@style/TextViewDataResponse"
+                    tools:text="64" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/BaseLinearLayoutHorizontal"
+                android:layout_height="80dp">
+
+                <TextView
+                    style="@style/TextViewStats"
+                    android:layout_height="match_parent"
+                    android:text="Tipo:" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/ivType1"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="5dp"
+                        tools:src="@drawable/ic_btnintro" />
+
+                    <ImageView
+                        android:id="@+id/ivType2"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="5dp"
+                        tools:src="@drawable/ic_btnintro" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

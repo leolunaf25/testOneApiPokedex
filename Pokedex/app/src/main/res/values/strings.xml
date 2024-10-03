@@ -1,4 +1,31 @@
 <resources>
     <string name="app_name">Pokedex</string>
     <string name="choose">Elige la generación</string>
+
+    <string name="error1">\tFail Connect</string>
+    <string name="start" translatable="false">Press\n\nStart</string>
+
+    <string name="baseurl" translatable="false">https://pokeapi.co/api/v2/</string>
+    <string name="signo" translatable="false">#</string>
+
+    <string name="id" translatable="false">id</string>
+    <string name="number" translatable="false">number</string>
+
+    <string name="baseurl2" translatable="false">https://pokeapi.co/api/v2/pokemon/</string>
+
+    <string name="imageurlini" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/</string>
+    <string name="imageurlfin" translatable="false">.png</string>
+    <string name="imagemin" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/</string>
+
+    <string name="experience">Experiencia base:</string>
+    <string name="height">Altura:</string>
+    <string name="weight">Peso:</string>
+    <string name="type">Tipo:</string>
+
+    <string name="line" translatable="false">/</string>
+
+
+
+
+
 </resources>

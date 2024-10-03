@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Estilo para el LinearLayout -->
+    <style name="BaseLinearLayoutHorizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- Estilo para el TextView con layout_weight -->
+    <style name="TextViewStats">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Estilo para el TextView con tamaño fijo -->
+    <style name="TextViewDataResponse">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:paddingLeft">40dp</item>
+    </style>
+</resources>

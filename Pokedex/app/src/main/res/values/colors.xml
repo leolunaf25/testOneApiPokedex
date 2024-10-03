@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--COLORS POKEDEX-->
+
+
     <!-- Colores de fondo claros -->
     <color name="background_primary">#090979</color> <!-- Azul claro -->
     <color name="background_secondary">#E0F2F1</color> <!-- Verde claro -->
