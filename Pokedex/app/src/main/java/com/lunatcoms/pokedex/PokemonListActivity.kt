@@ -34,7 +34,7 @@ class PokemonListActivity : AppCompatActivity() {
             1 -> 151 to 100
             2 -> 251 to 135
             3 -> 386 to 107
-            4 -> 493 to 156
+            4 -> 494 to 156
             5 -> 649 to 72
             6 -> 721 to 88
             7 -> 809 to 96
