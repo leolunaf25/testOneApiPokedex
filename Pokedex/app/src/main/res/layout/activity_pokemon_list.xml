@@ -21,8 +21,8 @@
         android:gravity="center"
         />
 
-    <SearchView
-        android:id="@+id/svPokemon"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchvPokemon"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/svPokemon"
+        app:layout_constraintTop_toBottomOf="@id/searchvPokemon"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="100dp"
         android:layout_marginTop="50dp"

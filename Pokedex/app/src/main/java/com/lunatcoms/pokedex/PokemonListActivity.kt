@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lunatcoms.pokedex.databinding.ActivityPokemonListBinding
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +21,7 @@ class PokemonListActivity : AppCompatActivity() {
 
     private lateinit var generationName:String
 
+    private var pokemonList: List<Pokemon> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,23 +43,40 @@ class PokemonListActivity : AppCompatActivity() {
             8 -> 905 to 120
             else -> 0 to 0
         }
-
-        callingRes(offset,limit)
-
+        initUI(offset,limit)
+        initSearchView()
     }
 
+    private fun initSearchView() {
+        binding.searchvPokemon.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Filtrar la lista de PokemonItem usando el nombre
+                val filteredPokemon = pokemonList.filter { it.name.contains(newText ?: "", ignoreCase = true) }
 
-    private fun callingRes(start:Int, end:Int) {
+                // Actualizar la lista filtrada en el adapter
+                adapter.updateList(filteredPokemon)
+                return true
+            }
+
+        })
+    }
+
+    private fun initUI(start:Int, end:Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(APIPokemon::class.java).getPokemon(end,start)
-            val pokemon = call.body()?.results?.map { it.name} ?: emptyList()
-            val pokemonUrl = call.body()?.results?.map { it.url} ?: emptyList()
+            //val pokemon = call.body()?.results?.map { it.name } ?: emptyList()
+            //val pokemonUrl = call.body()?.results?.map { it.url} ?: emptyList()
+
+            val pokemon = call.body()?.results?.map { Pokemon(it.name, it.url) } ?: emptyList()
 
             runOnUiThread {
                 if (call.isSuccessful) {
+                    pokemonList = pokemon
                     Log.i("Status", "Conexion realizada")
-
-                    adapter = PokemonAdapter(pokemon,pokemonUrl){pokeId -> navigateToPokemonData(pokeId)}
+                    adapter = PokemonAdapter(pokemonList){pokeId -> navigateToPokemonData(pokeId)}
                     binding.rvPokemon.layoutManager = LinearLayoutManager(parent)
                     binding.rvPokemon.adapter = adapter
 
@@ -81,5 +100,4 @@ class PokemonListActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-
 }

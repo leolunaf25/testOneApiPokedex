@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class PokemonAdapter(
-    private val pokemon: List<String>,
-    private val pokemonUrl: List<String>,
+    private var pokemon: List<Pokemon>,
     private val onItemSelected: (String) -> Unit
 ) : RecyclerView.Adapter<PokemonViewHolder>() {
 
+    fun updateList(list: List<Pokemon>){
+        pokemon = list
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -18,11 +21,10 @@ class PokemonAdapter(
 
     override fun getItemCount(): Int = pokemon.size
 
-
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        val itemId = """.*/(\d+)/""".toRegex().find(pokemonUrl[position])?.groupValues?.get(1) ?: ""
         val item = pokemon[position]
+        val itemId = """.*/(\d+)/""".toRegex().find(item.url)?.groupValues?.get(1) ?: ""
 
-        holder.bind(item,itemId)
+        holder.bind(item.name,itemId)
     }
 }
