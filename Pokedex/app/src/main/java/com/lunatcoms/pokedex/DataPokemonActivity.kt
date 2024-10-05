@@ -3,6 +3,7 @@ package com.lunatcoms.pokedex
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import com.lunatcoms.pokedex.databinding.ActivityDataPokemonBinding
 import com.squareup.picasso.Picasso
@@ -11,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 
 class DataPokemonActivity : AppCompatActivity() {
 
@@ -19,6 +21,11 @@ class DataPokemonActivity : AppCompatActivity() {
     private lateinit var pokeId: String
 
     private lateinit var imageViews: List<ImageView>
+
+    private val imageNormal =
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
+    private val imageShiny =
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,15 +37,23 @@ class DataPokemonActivity : AppCompatActivity() {
         pokeId = intent.getStringExtra("ID_POKEMON") ?: "Error"
 
         initUI(pokeId)
+
+        loadImage(imageNormal,pokeId)
+
     }
 
-    private fun initUI(pokeID:String) {
+    private fun initUI(pokeID: String) {
 
-        Picasso.get()
-            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokeID.png")
-            .into(binding.ivMainPoke)
+        binding.swShiny.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                loadImage(imageShiny,pokeID)
+            } else {
+                loadImage(imageNormal,pokeID)
+            }
+        }
 
-        CoroutineScope(Dispatchers.IO).launch{
+
+        CoroutineScope(Dispatchers.IO).launch {
             val dataPokemon = getRetrofit().create(APIPokemon::class.java).getDataPokemon(pokeID)
 
             val name = dataPokemon.body()?.name ?: ""
@@ -47,15 +62,18 @@ class DataPokemonActivity : AppCompatActivity() {
             val experience = dataPokemon.body()?.experience ?: ""
             val type = dataPokemon.body()?.types?.map { it.type.name } ?: emptyList()
 
-            runOnUiThread{
+            runOnUiThread {
                 binding.tvNamePokemon.text = name.uppercase()
                 binding.tvHeight.text = height
                 binding.tvWeight.text = weight
                 binding.tvExperience.text = experience
-                imageViews = listOf(binding.ivType1,binding.ivType2)
+                imageViews = listOf(binding.ivType1, binding.ivType2)
 
-                for (i in type.indices){
-                    Log.i("Tipo$i", """.*/(\d+)/""".toRegex().find(type[i])?.groupValues?.get(1) ?: "")
+                for (i in type.indices) {
+                    Log.i(
+                        "Tipo$i",
+                        """.*/(\d+)/""".toRegex().find(type[i])?.groupValues?.get(1) ?: ""
+                    )
                     val aux = """.*/(\d+)/""".toRegex().find(type[i])?.groupValues?.get(1) ?: ""
                     Picasso.get()
                         .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/$aux.png")
@@ -65,6 +83,23 @@ class DataPokemonActivity : AppCompatActivity() {
 
             }
         }
+    }
+
+    private fun loadImage(imageUrl: String, pokeID: String) {
+        binding.pbImageMain.visibility = View.VISIBLE
+        Picasso.get()
+            .load("$imageUrl$pokeID.png")
+            .into(binding.ivMainPoke, object : com.squareup.picasso.Callback{
+                override fun onSuccess() {
+                    binding.pbImageMain.visibility = View.GONE
+                }
+
+                override fun onError(e: Exception?) {
+                    binding.pbImageMain.visibility = View.GONE
+                }
+
+            })
+
     }
 
     private fun getRetrofit(): Retrofit {

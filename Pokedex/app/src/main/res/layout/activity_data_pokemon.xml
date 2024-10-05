@@ -18,15 +18,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/ivMainPoke"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:src="@drawable/ic_btnintro"
-                />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ivMainPoke"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:src="@drawable/ic_btnintro" />
+
+                <ProgressBar
+                    android:id="@+id/pbImageMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+
         </LinearLayout>
 
 
@@ -34,18 +46,17 @@
 
 
     <com.google.android.material.card.MaterialCardView
+        style="@style/CardWithTopRoundedCorners"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        style="@style/CardWithTopRoundedCorners"
-        app:cardElevation="0dp"
-        app:strokeColor="@color/white"
-        app:strokeWidth="1dp"
         android:backgroundTint="@color/transparenBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.55"
-        app:layout_constraintStart_toStartOf="parent"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvOne">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvOne"
+        app:strokeColor="@color/white"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,7 +110,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingHorizontal="10dp">
 
                 <TextView
@@ -114,20 +125,48 @@
 
                     <ImageView
                         android:id="@+id/ivType1"
-                        android:layout_marginTop="2dp"
-
                         android:layout_width="match_parent"
+
                         android:layout_height="30dp"
                         android:layout_marginStart="5dp"
+                        android:layout_marginTop="2dp"
                         tools:src="@drawable/ic_btnintro" />
 
                     <ImageView
                         android:id="@+id/ivType2"
-                        android:layout_marginTop="4dp"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginStart="5dp"
+                        android:layout_marginTop="4dp"
                         tools:src="@drawable/ic_btnintro" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout style="@style/BaseLinearLayoutHorizontal">
+
+                <TextView
+                    style="@style/TextViewStats"
+                    android:text="Shiny:" />
+
+                <LinearLayout
+                    android:id="@+id/tvShiny"
+                    style="@style/TextViewDataResponse"
+                    android:orientation="horizontal"
+                    android:paddingStart="0dp"
+                    tools:text="64">
+
+                    <ImageView
+                        android:id="@+id/ivShiny"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="2dp"
+                        android:src="@drawable/ic_shiny" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/swShiny"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
                 </LinearLayout>
             </LinearLayout>
 
