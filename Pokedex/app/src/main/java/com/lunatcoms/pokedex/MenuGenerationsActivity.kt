@@ -1,8 +1,12 @@
 package com.lunatcoms.pokedex
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lunatcoms.pokedex.databinding.ActivityMenuGenerationsBinding
 import com.lunatcoms.pokedex.menuGenerations.GenerationAdapter
@@ -31,8 +35,30 @@ class MenuGenerationsActivity : AppCompatActivity() {
     }
 
     private fun navigateToPokemonList(generation: String){
-        val intent = Intent(this, PokemonListActivity::class.java)
-        intent.putExtra("GENERATION_NAME", generation)
-        startActivity(intent)
+
+        if (isNetworkAvailable(this)) {
+            val intent = Intent(this, PokemonListActivity::class.java)
+            intent.putExtra("GENERATION_NAME", generation)
+            startActivity(intent)
+        } else{
+            showError("No hay conexión a internet")
+        }
     }
+    private fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+    public fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return when {
+            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
+        }
+    }
+
+
 }

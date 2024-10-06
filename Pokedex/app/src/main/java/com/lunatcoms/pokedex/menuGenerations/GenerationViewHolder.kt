@@ -3,8 +3,10 @@ package com.lunatcoms.pokedex.menuGenerations
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.lunatcoms.pokedex.R
 import com.lunatcoms.pokedex.databinding.ItemGenerationBinding
 import com.squareup.picasso.Picasso
+
 
 class GenerationViewHolder(view: View, private val onItemSelected: (String) -> Unit) :
     RecyclerView.ViewHolder(view) {
@@ -25,6 +27,7 @@ class GenerationViewHolder(view: View, private val onItemSelected: (String) -> U
             Picasso.get()
                 .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${aux + i * 3}.png")
                 .fit()
+                .error(R.drawable.ic_btnintro)
                 .into(imageViews[i])
         }
 

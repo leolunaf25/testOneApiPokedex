@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lunatcoms.pokedex.databinding.ActivityPokemonListBinding
@@ -12,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 
 class PokemonListActivity : AppCompatActivity() {
 
@@ -19,7 +21,7 @@ class PokemonListActivity : AppCompatActivity() {
 
     private lateinit var adapter: PokemonAdapter
 
-    private lateinit var generationName:String
+    private lateinit var generationName: String
 
     private var pokemonList: List<Pokemon> = listOf()
 
@@ -29,7 +31,6 @@ class PokemonListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         generationName = intent.getStringExtra("GENERATION_NAME") ?: ""
-        binding.tvPokemonList.text = generationName
 
         val (offset, limit) = when (generationName.toInt()) {
             0 -> 0 to 151
@@ -43,7 +44,7 @@ class PokemonListActivity : AppCompatActivity() {
             8 -> 905 to 120
             else -> 0 to 0
         }
-        initUI(offset,limit)
+        initUI(offset, limit)
         initSearchView()
     }
 
@@ -52,9 +53,11 @@ class PokemonListActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
+
             override fun onQueryTextChange(newText: String?): Boolean {
                 // Filtrar la lista de PokemonItem usando el nombre
-                val filteredPokemon = pokemonList.filter { it.name.contains(newText ?: "", ignoreCase = true) }
+                val filteredPokemon =
+                    pokemonList.filter { it.name.contains(newText ?: "", ignoreCase = true) }
 
                 // Actualizar la lista filtrada en el adapter
                 adapter.updateList(filteredPokemon)
@@ -64,35 +67,56 @@ class PokemonListActivity : AppCompatActivity() {
         })
     }
 
-    private fun initUI(start:Int, end:Int) {
+    private fun initUI(start: Int, end: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(APIPokemon::class.java).getPokemon(end,start)
-            //val pokemon = call.body()?.results?.map { it.name } ?: emptyList()
-            //val pokemonUrl = call.body()?.results?.map { it.url} ?: emptyList()
 
-            val pokemon = call.body()?.results?.map { Pokemon(it.name, it.url) } ?: emptyList()
+            //Manejo de errores
+            try {
+                val call = getRetrofit().create(APIPokemon::class.java).getPokemon(end, start)
+                //Código implementado al inicio de la práctica.
+                //val pokemon = call.body()?.results?.map { it.name } ?: emptyList()
+                //val pokemonUrl = call.body()?.results?.map { it.url} ?: emptyList()
 
-            runOnUiThread {
-                if (call.isSuccessful) {
-                    pokemonList = pokemon
-                    Log.i("Status", "Conexion realizada")
-                    adapter = PokemonAdapter(pokemonList){pokeId -> navigateToPokemonData(pokeId)}
-                    binding.rvPokemon.layoutManager = LinearLayoutManager(parent)
-                    binding.rvPokemon.adapter = adapter
+                val pokemon = call.body()?.results?.map { Pokemon(it.name, it.url) } ?: emptyList()
 
-                } else {
-                    Log.i("Status", "Conexion No realizada")
+                runOnUiThread {
+                    if (call.isSuccessful) {
+                        pokemonList = pokemon
+                        adapter =
+                            PokemonAdapter(pokemonList) { pokeId -> navigateToPokemonData(pokeId) }
+                        binding.rvPokemon.layoutManager = LinearLayoutManager(parent)
+                        binding.rvPokemon.adapter = adapter
+
+                    } else {
+                        runOnUiThread {
+                            showError("Error")
+                        }
+                    }
+                }
+
+            } catch (e: IOException) {
+                runOnUiThread {
+                    showError("No se pudo realizar la conexión. Verifica tu conexión a internet.")
                 }
             }
         }
     }
 
-    private fun navigateToPokemonData(pokeId: String) {
-        val intent = Intent(this, DataPokemonActivity::class.java)
-        intent.putExtra("ID_POKEMON", pokeId)
-        startActivity(intent)
+    private fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
+    private fun navigateToPokemonData(pokeId: String) {
+        val isNet = MenuGenerationsActivity()
+        if (isNet.isNetworkAvailable(this)) {
+            val intent = Intent(this, DataPokemonActivity::class.java)
+            intent.putExtra("ID_POKEMON", pokeId)
+            startActivity(intent)
+        } else {
+            showError("No hay conexión a internet")
+        }
+
+    }
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()

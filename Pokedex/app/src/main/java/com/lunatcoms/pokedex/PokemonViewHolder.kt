@@ -17,8 +17,8 @@ class PokemonViewHolder(view: View, private val onItemSelected: (String) -> Unit
         Picasso.get()
             .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$pokemonUrl.png")
             .fit()
+            .error(R.drawable.ic_btnintro)
             .into(binding.ivPokemon)
-
         binding.btnPokemon.setOnClickListener { onItemSelected(pokemonUrl) }
     }
 
