@@ -82,8 +82,7 @@ class PokemonListActivity : AppCompatActivity() {
                 runOnUiThread {
                     if (call.isSuccessful) {
                         pokemonList = pokemon
-                        adapter =
-                            PokemonAdapter(pokemonList) { pokeId -> navigateToPokemonData(pokeId) }
+                        adapter = PokemonAdapter(pokemonList) { pokeId -> navigateToPokemonData(pokeId) }
                         binding.rvPokemon.layoutManager = LinearLayoutManager(parent)
                         binding.rvPokemon.adapter = adapter
 

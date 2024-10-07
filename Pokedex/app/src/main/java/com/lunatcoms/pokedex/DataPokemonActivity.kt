@@ -1,12 +1,16 @@
 package com.lunatcoms.pokedex
 
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.palette.graphics.Palette
 import com.lunatcoms.pokedex.databinding.ActivityDataPokemonBinding
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -16,6 +20,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.lang.Exception
+
+import com.squareup.picasso.Target
+
 
 class DataPokemonActivity : AppCompatActivity() {
 
@@ -124,7 +131,6 @@ class DataPokemonActivity : AppCompatActivity() {
                     binding.pbImageMain.visibility = View.GONE
                     showError("Error de conexión")
                 }
-
             })
 
     }

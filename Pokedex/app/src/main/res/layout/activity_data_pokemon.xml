@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundgradientprimary"
-    tools:context=".DataPokemonActivity">
+    tools:context=".DataPokemonActivity"
+    android:id="@+id/viewMain">
 
     <LinearLayout
         android:id="@+id/cvOne"
@@ -77,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginBottom="10dp"
                 android:paddingHorizontal="10dp"
                >
 

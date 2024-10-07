@@ -11,7 +11,7 @@ class PokemonViewHolder(view: View, private val onItemSelected: (String) -> Unit
     private val binding = ItemPokemonBinding.bind(view)
 
     fun bind(pokemon: String, pokemonUrl: String) {
-        binding.tvPokemonName.text = pokemon
+        binding.tvPokemonName.text = pokemon.replaceFirstChar { it.uppercase() }
         binding.tvPokemonId.text = pokemonUrl
 
         Picasso.get()
