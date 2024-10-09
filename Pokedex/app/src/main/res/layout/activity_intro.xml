@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundgradientprimary"
+    android:background="@drawable/background_gradient_primary"
     tools:context=".IntroActivity"
     >
 
@@ -17,38 +17,41 @@
         android:src="@drawable/intro"
         android:layout_marginTop="80dp"
         android:layout_marginHorizontal="40dp"
-        />
+        android:contentDescription="@string/descriptionIntro" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnInit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="180dp"
-        android:contentDescription="Icon"
-        android:src="@drawable/ic_btnintro"
+        android:contentDescription="@string/descriptionBtnIntro"
+        android:src="@drawable/ic_btn_intro"
         app:backgroundTint="@color/button_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="56dp"
-        app:tint="@color/text_on_button_primary" />
+        app:tint="@color/text_on_button_primary"
+        tools:tint="@color/black"
+        />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btnInit2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="120dp"
-        android:contentDescription="Icon"
-        android:src="@drawable/ic_btnintro"
-        android:text="Iniciar"
+        android:contentDescription="@string/descriptionBtnOneIntro"
+        android:text="@string/start"
         android:textColor="@color/text_on_button_primary"
+        tools:textColor="@color/black"
         app:backgroundTint="@color/button_primary"
-        app:icon="@drawable/ic_btnintro"
+        app:icon="@drawable/ic_btn_intro"
         app:iconTint="@color/text_on_button_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="56dp"
-
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

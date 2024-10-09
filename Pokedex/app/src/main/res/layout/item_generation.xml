@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="22dp"
     android:layout_marginVertical="8dp"
-    android:backgroundTint="@color/transparenBackground"
+    android:backgroundTint="@color/transparent_Background"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
     app:strokeColor="@color/white"
@@ -21,7 +21,7 @@
         <TextView
             android:id="@+id/tvGeneration"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="15dp"
             android:layout_weight="1"
             android:textAlignment="center"
@@ -36,15 +36,18 @@
 
             <ImageView
                 android:id="@+id/ivR1"
-                style="@style/GenerationImageViewStyle" />
+                style="@style/GenerationImageViewStyle"
+                android:contentDescription="@string/descriptionImageOne" />
 
             <ImageView
                 android:id="@+id/ivR2"
-                style="@style/GenerationImageViewStyle" />
+                style="@style/GenerationImageViewStyle"
+                android:contentDescription="@string/descriptionImageTwo" />
 
             <ImageView
                 android:id="@+id/ivR3"
-                style="@style/GenerationImageViewStyle" />
+                style="@style/GenerationImageViewStyle"
+                android:contentDescription="@string/descriptionImageThree" />
 
         </LinearLayout>
 

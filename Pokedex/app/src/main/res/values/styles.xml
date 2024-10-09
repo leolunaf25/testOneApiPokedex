@@ -44,7 +44,8 @@
         <item name="android:layout_width">75dp</item>
         <item name="android:layout_height">70dp</item>
         <item name="android:layout_marginHorizontal">15dp</item>
-        <item name="android:src">@drawable/ic_btnintro</item> <!-- Puedes eliminar este si lo quieres cambiar dinámicamente -->
+        <item name="android:src">@drawable/ic_btn_intro
+        </item> <!-- Puedes eliminar este si lo quieres cambiar dinámicamente -->
     </style>
 
 </resources>

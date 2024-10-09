@@ -11,9 +11,7 @@ class PokemonAdapter(
 
     fun updateList(list: List<Pokemon>){
         pokemon = list
-        notifyDataSetChanged()
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return PokemonViewHolder(layoutInflater.inflate(R.layout.item_pokemon, parent, false), onItemSelected)
@@ -23,7 +21,8 @@ class PokemonAdapter(
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val item = pokemon[position]
-        val itemId = """.*/(\d+)/""".toRegex().find(item.url)?.groupValues?.get(1) ?: ""
+        //val itemId = """.*/(\d+)/""".toRegex().find(item.url)?.groupValues?.get(1) ?: ""
+        val itemId = holder.itemView.context.getString(R.string.url_regex).toRegex().find(item.url)?.groupValues?.get(1) ?: holder.itemView.context.getString(R.string.default_value)
 
         holder.bind(item.name,itemId)
     }

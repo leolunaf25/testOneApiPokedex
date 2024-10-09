@@ -16,7 +16,7 @@ class MenuGenerationsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMenuGenerationsBinding
     private lateinit var adapter: GenerationAdapter
 
-    private val generaciones by lazy {
+    private val generations by lazy {
         resources.getStringArray(R.array.generaciones).toList()
     }
 
@@ -29,28 +29,30 @@ class MenuGenerationsActivity : AppCompatActivity() {
 
     }
     private fun initRecyclerView() {
-        adapter = GenerationAdapter(generaciones) {generation -> navigateToPokemonList(generation)}
+        adapter = GenerationAdapter(generations) { generation -> navigateToPokemonList(generation) }
         binding.rvGenerations.layoutManager = LinearLayoutManager(this)
         binding.rvGenerations.adapter = adapter
     }
 
-    private fun navigateToPokemonList(generation: String){
+    private fun navigateToPokemonList(generation: String) {
 
         if (isNetworkAvailable(this)) {
             val intent = Intent(this, PokemonListActivity::class.java)
-            intent.putExtra("GENERATION_NAME", generation)
+            intent.putExtra(ApiConstants.GENERATION_NAME, generation)
             startActivity(intent)
-        } else{
-            showError("No hay conexión a internet")
+        } else {
+            showError(getString(R.string.connection_Error_one))
         }
     }
     private fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-    public fun isNetworkAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork ?: return false
-        val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        val networkCapabilities =
+            connectivityManager.getNetworkCapabilities(network) ?: return false
 
         return when {
             networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true

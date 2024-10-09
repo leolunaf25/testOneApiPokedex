@@ -3,7 +3,6 @@ package com.lunatcoms.pokedex
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +29,7 @@ class PokemonListActivity : AppCompatActivity() {
         binding = ActivityPokemonListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        generationName = intent.getStringExtra("GENERATION_NAME") ?: ""
+        generationName = intent.getStringExtra(ApiConstants.GENERATION_NAME) ?: getString(R.string.default_value)
 
         val (offset, limit) = when (generationName.toInt()) {
             0 -> 0 to 151
@@ -57,7 +56,7 @@ class PokemonListActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 // Filtrar la lista de PokemonItem usando el nombre
                 val filteredPokemon =
-                    pokemonList.filter { it.name.contains(newText ?: "", ignoreCase = true) }
+                    pokemonList.filter { it.name.contains(newText ?: getString(R.string.default_value), ignoreCase = true) }
 
                 // Actualizar la lista filtrada en el adapter
                 adapter.updateList(filteredPokemon)
@@ -88,14 +87,14 @@ class PokemonListActivity : AppCompatActivity() {
 
                     } else {
                         runOnUiThread {
-                            showError("Error")
+                            showError(getString(R.string.connection_Error_one))
                         }
                     }
                 }
 
             } catch (e: IOException) {
                 runOnUiThread {
-                    showError("No se pudo realizar la conexión. Verifica tu conexión a internet.")
+                    showError(getString(R.string.connection_Error))
                 }
             }
         }
@@ -112,14 +111,13 @@ class PokemonListActivity : AppCompatActivity() {
             intent.putExtra(ApiConstants.ID_POKEMON, pokeId)
             startActivity(intent)
         } else {
-            showError("No hay conexión a internet")
+            showError(getString(R.string.connection_Error))
         }
-
     }
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://pokeapi.co/api/v2/")
+            .baseUrl(ApiConstants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

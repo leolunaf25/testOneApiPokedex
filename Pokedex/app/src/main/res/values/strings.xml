@@ -1,31 +1,20 @@
 <resources>
     <string name="app_name">Pokedex</string>
     <string name="choose">Elige la generación</string>
-
-    <string name="error1">\tFail Connect</string>
-    <string name="start" translatable="false">Press\n\nStart</string>
-
-    <string name="baseurl" translatable="false">https://pokeapi.co/api/v2/</string>
-    <string name="signo" translatable="false">#</string>
-
-    <string name="id" translatable="false">id</string>
-    <string name="number" translatable="false">number</string>
-
-    <string name="baseurl2" translatable="false">https://pokeapi.co/api/v2/pokemon/</string>
-
-    <string name="imagemin" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/</string>
-
+    <string name="choose_character">Selecciona a un pokémon</string>
 
     //UPDATE STRINGS
     <string name="experience">Experiencia base:</string>
     <string name="height">Altura:</string>
     <string name="weight">Peso:</string>
     <string name="type">Tipo:</string>
-    <string name="line" translatable="false">/</string>
+    <string name="shiny">Shiny:</string>
+
+    <string name="start">Iniciar</string>
 
     <string name="urlImageNormal" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/%1$s.png</string>
     <string name="urlImageShiny" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/%1$s.png</string>
-
+    <string name="urlImageSprite" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/%1$s.png</string>
     <string name="urlImageType" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/%1$s.png</string>
 
     //Units
@@ -45,6 +34,23 @@
 
     //Easter egg
     <string name="easter_egg">Vamo a calmarno</string>
+
+    //Descriptions
+    <string name="descriptionImageMain">Main image character</string>
+    <string name="descriptionImageType">Type image character</string>
+    <string name="descriptionImageIconShiny">Shiny icon</string>
+    <string name="descriptionIntro">Intro</string>
+    <string name="descriptionBtnIntro">ButtonIntro</string>
+    <string name="descriptionBtnOneIntro">ButtonIntroOne</string>
+    <string name="descriptionImageOne">ImageOne</string>
+    <string name="descriptionImageTwo">ImageTwo</string>
+    <string name="descriptionImageThree">ImageThree</string>
+    <string name="descriptionImageSprite">SpriteCharacter</string>
+
+
+    //Strings examples
+    <string name="sampleName">Charmander</string>
+    <string name="sampleNum">00001</string>
 
 
 </resources>

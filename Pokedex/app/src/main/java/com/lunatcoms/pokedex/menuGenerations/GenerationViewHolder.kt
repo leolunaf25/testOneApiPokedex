@@ -20,18 +20,17 @@ class GenerationViewHolder(view: View, private val onItemSelected: (String) -> U
         binding.btnGeneration.setOnClickListener { onItemSelected(position.toString()) }
         imageViews = listOf(binding.ivR1, binding.ivR2, binding.ivR3)
 
-        val startPoints = listOf(1, 152, 252, 387, 495, 650, 722, 810, 906)
-        val aux = startPoints.getOrNull(position) ?: return // Evita índices fuera del rango
+        val startPoints = itemView.context.resources.getIntArray(R.array.StartPoints).toList()
+        val aux = startPoints.getOrNull(position) ?: return // Avoid indices out of range
 
         for (i in imageViews.indices) {
             Picasso.get()
-                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${aux + i * 3}.png")
-                //.load(view.context.getString(R.string.urlImageNormal, (aux + i * 3).toString())) // Accediendo al context desde el view
+                //.load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${aux + i * 3}.png")
+                .load(itemView.context.getString(R.string.urlImageNormal,(aux + i * 3).toString()))
                 .fit()
-                .error(R.drawable.ic_btnintro)
+                .error(R.drawable.ic_btn_intro)
                 .into(imageViews[i])
         }
-
 
     }
 

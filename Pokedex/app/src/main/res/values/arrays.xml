@@ -11,4 +11,16 @@
         <item>Octava Generación</item>
         <item>Novena Generación</item>
     </string-array>
+
+    <integer-array name="StartPoints">
+        <item>1</item>
+        <item>152</item>
+        <item>252</item>
+        <item>387</item>
+        <item>495</item>
+        <item>650</item>
+        <item>722</item>
+        <item>810</item>
+        <item>906</item>
+    </integer-array>
 </resources>

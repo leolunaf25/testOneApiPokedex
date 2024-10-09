@@ -90,7 +90,7 @@ class DataPokemonActivity : AppCompatActivity() {
 
                             Picasso.get()
                                 .load(getString(R.string.urlImageType,aux))
-                                .error(R.drawable.ic_btnintro)
+                                .error(R.drawable.ic_btn_intro)
                                 .into(imageViews[i])
                         }
 
@@ -116,7 +116,7 @@ class DataPokemonActivity : AppCompatActivity() {
         binding.pbImageMain.visibility = View.VISIBLE
         Picasso.get()
             .load(getString(imageUrl,pokeID))
-            .error(R.drawable.ic_btnintro)
+            .error(R.drawable.ic_btn_intro)
             .into(binding.ivMainPoke, object : com.squareup.picasso.Callback {
                 override fun onSuccess() {
                     binding.pbImageMain.visibility = View.GONE

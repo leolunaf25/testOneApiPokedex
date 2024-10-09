@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@drawable/backgroundgradientprimary"
-    tools:context=".DataPokemonActivity"
-    android:id="@+id/viewMain">
+    tools:background="@drawable/background_gradient_primary"
+    tools:context=".DataPokemonActivity">
 
     <LinearLayout
         android:id="@+id/cvOne"
@@ -17,40 +17,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
 
-            <FrameLayout
+            <ImageView
+                android:id="@+id/ivMainPoke"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:contentDescription="@string/descriptionImageMain"
+                tools:src="@drawable/ic_btn_intro"
+                tools:tint="@color/black" />
 
-                <ImageView
-                    android:id="@+id/ivMainPoke"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:src="@drawable/ic_btnintro" />
-
-                <ProgressBar
-                    android:id="@+id/pbImageMain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:visibility="gone" />
-            </FrameLayout>
-
-
-        </LinearLayout>
+            <ProgressBar
+                android:id="@+id/pbImageMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+        </FrameLayout>
 
 
     </LinearLayout>
-
 
     <com.google.android.material.card.MaterialCardView
         style="@style/CardWithTopRoundedCorners"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:backgroundTint="@color/transparenBackground"
+        android:backgroundTint="@color/transparent_Background"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,107 +63,134 @@
                 android:id="@+id/tvNamePokemon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:textSize="36sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                tools:text="Charmander" />
+                tools:text="@string/sampleName" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp">
+
+        <ImageView
+            android:id="@+id/ivType1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/descriptionImageType"
+            tools:src="@drawable/ic_btn_intro"
+            tools:tint="@color/black"/>
+
+        <ImageView
+            android:id="@+id/ivType2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/descriptionImageType"
+            tools:src="@drawable/ic_btn_intro"
+            tools:tint="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/BaseLinearLayoutHorizontal"
+        >
+
+        <TextView
+            style="@style/TextViewStats"
+            android:text="@string/experience"
+            />
+
+        <TextView
+            android:id="@+id/tvExperience"
+            style="@style/TextViewDataResponse"
+            tools:text="@string/sampleNum" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/BaseLinearLayoutHorizontal">
+
+        <TextView
+            style="@style/TextViewStats"
+            android:text="@string/height" />
+
+        <TextView
+            android:id="@+id/tvHeight"
+            style="@style/TextViewDataResponse"
+            tools:text="@string/sampleNum" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/BaseLinearLayoutHorizontal">
+
+        <TextView
+            style="@style/TextViewStats"
+            android:text="@string/weight" />
+
+        <TextView
+            android:id="@+id/tvWeight"
+            style="@style/TextViewDataResponse"
+            tools:text="@string/sampleNum" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/BaseLinearLayoutHorizontal"
+
+        android:padding="0dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+
+
+        >
+
+        <TextView
+            style="@style/TextViewStats"
+            android:text="@string/shiny"
+            android:layout_gravity="center_vertical"
+            />
+
+        <LinearLayout
+            android:id="@+id/tvShiny"
+            style="@style/TextViewDataResponse"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            >
+
+            <ImageView
+                android:id="@+id/ivShiny"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_shiny"
+                tools:tint="@color/black"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/descriptionImageIconShiny" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swShiny"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginBottom="10dp"
-                android:paddingHorizontal="10dp"
-               >
+                />
 
-                <ImageView
-                    android:id="@+id/ivType1"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="2dp"
-                    tools:src="@drawable/ic_btnintro"
-                    android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/ivType2"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="2dp"
-                    tools:src="@drawable/ic_btnintro" />
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/BaseLinearLayoutHorizontal">
-
-                <TextView
-                    style="@style/TextViewStats"
-                    android:text="Experiencia base:" />
-
-                <TextView
-                    android:id="@+id/tvExperience"
-                    style="@style/TextViewDataResponse"
-                    tools:text="64" />
-            </LinearLayout>
-
-            <LinearLayout style="@style/BaseLinearLayoutHorizontal">
-
-                <TextView
-                    style="@style/TextViewStats"
-                    android:text="Altura:" />
-
-                <TextView
-                    android:id="@+id/tvHeight"
-                    style="@style/TextViewDataResponse"
-                    tools:text="7" />
-            </LinearLayout>
-
-            <LinearLayout style="@style/BaseLinearLayoutHorizontal">
-
-                <TextView
-                    style="@style/TextViewStats"
-                    android:text="Peso:" />
-
-                <TextView
-                    android:id="@+id/tvWeight"
-                    style="@style/TextViewDataResponse"
-                    tools:text="64" />
-            </LinearLayout>
-
-
-            <LinearLayout style="@style/BaseLinearLayoutHorizontal">
-
-                <TextView
-                    style="@style/TextViewStats"
-                    android:text="Shiny:" />
-
-                <LinearLayout
-                    android:id="@+id/tvShiny"
-                    style="@style/TextViewDataResponse"
-                    android:orientation="horizontal"
-                    android:paddingStart="0dp"
-                    tools:text="64">
-
-                    <ImageView
-                        android:id="@+id/ivShiny"
-                        android:layout_width="40dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="2dp"
-                        android:src="@drawable/ic_shiny" />
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/swShiny"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-            </LinearLayout>
+</LinearLayout>
 
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
