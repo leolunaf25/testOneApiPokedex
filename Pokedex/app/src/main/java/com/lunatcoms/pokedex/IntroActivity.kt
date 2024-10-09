@@ -34,7 +34,7 @@ class IntroActivity : AppCompatActivity() {
             mediaPlayer.start()
         }
         mediaPlayer.setOnCompletionListener {
-            mediaPlayer.seekTo(0) // Reiniciar a la posición inicial
+            mediaPlayer.seekTo(0) // Reset to original position
         }
     }
 

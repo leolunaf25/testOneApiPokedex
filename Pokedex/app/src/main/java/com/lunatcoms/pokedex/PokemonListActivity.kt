@@ -109,7 +109,7 @@ class PokemonListActivity : AppCompatActivity() {
         val isNet = MenuGenerationsActivity()
         if (isNet.isNetworkAvailable(this)) {
             val intent = Intent(this, DataPokemonActivity::class.java)
-            intent.putExtra("ID_POKEMON", pokeId)
+            intent.putExtra(ApiConstants.ID_POKEMON, pokeId)
             startActivity(intent)
         } else {
             showError("No hay conexión a internet")

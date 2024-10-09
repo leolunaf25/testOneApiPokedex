@@ -3,10 +3,8 @@ package com.lunatcoms.pokedex
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -20,7 +18,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.lang.Exception
-
 import com.squareup.picasso.Target
 
 
@@ -32,10 +29,8 @@ class DataPokemonActivity : AppCompatActivity() {
 
     private lateinit var imageViews: List<ImageView>
 
-    private val imageNormal =
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
-    private val imageShiny =
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/"
+    private val imageNormal = R.string.urlImageNormal
+    private val imageShiny = R.string.urlImageShiny
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +39,7 @@ class DataPokemonActivity : AppCompatActivity() {
         binding = ActivityDataPokemonBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        pokeId = intent.getStringExtra("ID_POKEMON") ?: "Error"
+        pokeId = intent.getStringExtra(ApiConstants.ID_POKEMON) ?:ApiConstants.ERROR
 
         initUI(pokeId)
 
@@ -66,12 +61,11 @@ class DataPokemonActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
 
             try {
-                val dataPokemon =
-                    getRetrofit().create(APIPokemon::class.java).getDataPokemon(pokeID)
-                val name = dataPokemon.body()?.name ?: ""
-                val height = dataPokemon.body()?.height ?: ""
-                val weight = dataPokemon.body()?.weight ?: ""
-                val experience = dataPokemon.body()?.experience ?: ""
+                val dataPokemon = getRetrofit().create(APIPokemon::class.java).getDataPokemon(pokeID)
+                val name = dataPokemon.body()?.name ?: getString(R.string.default_value)
+                val height = dataPokemon.body()?.height ?: 0
+                val weight = dataPokemon.body()?.weight ?: 0
+                val experience = dataPokemon.body()?.experience ?: getString(R.string.default_value)
                 val type = dataPokemon.body()?.types?.map { it.type.name } ?: emptyList()
 
                 runOnUiThread {
@@ -79,34 +73,35 @@ class DataPokemonActivity : AppCompatActivity() {
                         binding.tvNamePokemon.text = name.uppercase()
 
                         if (pokeID=="7"){
-                            binding.tvNamePokemon.text = "Vamo a calmarno"
+                            binding.tvNamePokemon.text = getString(R.string.easter_egg)
                         }
 
-                        binding.tvHeight.text = height
-                        binding.tvWeight.text = weight
+                        binding.tvHeight.text = getString(R.string.heightUnit_format, (height/10F).toString())
+                        binding.tvWeight.text = getString(R.string.weightUnit_format, (weight/10F).toString())
+
                         binding.tvExperience.text = experience
                         imageViews = listOf(binding.ivType1, binding.ivType2)
 
                         if (type.count()==1){binding.ivType2.visibility = View.GONE}
                         for (i in type.indices) {
 
-                            val aux =
-                                """.*/(\d+)/""".toRegex().find(type[i])?.groupValues?.get(1) ?: ""
+                            //val aux = """.*/(\\d+)/""".toRegex().find(type[i])?.groupValues?.get(1) ?: getString(R.string.default_value)
+                            val aux = getString(R.string.url_regex).toRegex().find(type[i])?.groupValues?.get(1) ?: getString(R.string.default_value)
 
                             Picasso.get()
-                                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/$aux.png")
+                                .load(getString(R.string.urlImageType,aux))
                                 .error(R.drawable.ic_btnintro)
                                 .into(imageViews[i])
                         }
 
                     } else {
-
+                        showError(getString(R.string.connection_Error))
                     }
                 }
 
             } catch (e: IOException) {
                 runOnUiThread {
-                    showError("No se pudo realizar la conexión. Verifica tu conexión a internet.")
+                    showError(getString(R.string.connection_Error))
                 }
             }
 
@@ -117,10 +112,10 @@ class DataPokemonActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    private fun loadImage(imageUrl: String, pokeID: String) {
+    private fun loadImage(imageUrl: Int, pokeID: String) {
         binding.pbImageMain.visibility = View.VISIBLE
         Picasso.get()
-            .load("$imageUrl$pokeID.png")
+            .load(getString(imageUrl,pokeID))
             .error(R.drawable.ic_btnintro)
             .into(binding.ivMainPoke, object : com.squareup.picasso.Callback {
                 override fun onSuccess() {
@@ -129,15 +124,39 @@ class DataPokemonActivity : AppCompatActivity() {
 
                 override fun onError(e: Exception?) {
                     binding.pbImageMain.visibility = View.GONE
-                    showError("Error de conexión")
+                    showError(getString(R.string.connection_Error_one))
                 }
             })
+
+        Picasso.get().load(getString(imageUrl,pokeID)).into(object : Target {
+            override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom?) {
+                // Usa Palette para extraer los colores
+                Palette.from(bitmap).generate { palette ->
+                    palette?.let {
+                        // Obtener los colores comunes
+                        val dominantColor = it.getDominantColor(Color.BLACK) // Color dominante
+
+                        // Aplicar el color dominante como fondo de un layout
+                        binding.viewMain.setBackgroundColor(dominantColor)
+                        window.statusBarColor = dominantColor
+                    }
+                }
+            }
+
+            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                // Manejo de errores
+            }
+
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                // Mostrar un placeholder optional
+            }
+        })
 
     }
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://pokeapi.co/api/v2/")
+            .baseUrl(ApiConstants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

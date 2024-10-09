@@ -8,8 +8,8 @@ data class Pokemon(@SerializedName("name") val name: String, @SerializedName("ur
 data class PokemonDataResponse(
     @SerializedName("name") val name: String,
     @SerializedName("base_experience") val experience: String,
-    @SerializedName("height") val height: String,
-    @SerializedName("weight") val weight: String,
+    @SerializedName("height") val height: Int,
+    @SerializedName("weight") val weight: Int,
     @SerializedName("types") val types: List<TypeSlot>
 )
 data class TypeSlot(@SerializedName("type") val type: TypeRes)

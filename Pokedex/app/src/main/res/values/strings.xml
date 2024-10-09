@@ -13,19 +13,38 @@
 
     <string name="baseurl2" translatable="false">https://pokeapi.co/api/v2/pokemon/</string>
 
-    <string name="imageurlini" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/</string>
-    <string name="imageurlfin" translatable="false">.png</string>
     <string name="imagemin" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/</string>
 
+
+    //UPDATE STRINGS
     <string name="experience">Experiencia base:</string>
     <string name="height">Altura:</string>
     <string name="weight">Peso:</string>
     <string name="type">Tipo:</string>
-
     <string name="line" translatable="false">/</string>
 
+    <string name="urlImageNormal" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/%1$s.png</string>
+    <string name="urlImageShiny" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/%1$s.png</string>
 
+    <string name="urlImageType" translatable="false">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/%1$s.png</string>
 
+    //Units
+    <string name="heightUnit_format">%1$s m</string>
+    <string name="weightUnit_format">%1$s kg</string>
+
+    //Regular expression
+    <string name="url_regex">.*/(\\d+)/</string>
+
+    //Strings default
+    //Empty string
+    <string name="default_value"> </string>
+
+    //String errors
+    <string name="connection_Error">No se pudo realizar la conexión. Verifica tu conexión a internet."</string>
+    <string name="connection_Error_one">Error de conexión</string>
+
+    //Easter egg
+    <string name="easter_egg">Vamo a calmarno</string>
 
 
 </resources>

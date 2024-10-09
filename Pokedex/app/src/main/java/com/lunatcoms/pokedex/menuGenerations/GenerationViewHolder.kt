@@ -26,6 +26,7 @@ class GenerationViewHolder(view: View, private val onItemSelected: (String) -> U
         for (i in imageViews.indices) {
             Picasso.get()
                 .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${aux + i * 3}.png")
+                //.load(view.context.getString(R.string.urlImageNormal, (aux + i * 3).toString())) // Accediendo al context desde el view
                 .fit()
                 .error(R.drawable.ic_btnintro)
                 .into(imageViews[i])
