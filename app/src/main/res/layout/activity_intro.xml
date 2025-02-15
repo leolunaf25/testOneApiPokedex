@@ -17,10 +17,11 @@
         android:src="@drawable/intro"
         android:layout_marginTop="80dp"
         android:layout_marginHorizontal="40dp"
+        android:visibility="invisible"
         android:contentDescription="@string/descriptionIntro" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnInit"
+        android:id="@+id/btnInit2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="180dp"
@@ -32,14 +33,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="56dp"
         app:tint="@color/text_on_button_primary"
+        android:visibility="invisible"
         tools:tint="@color/black"
         />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/btnInit2"
+        android:id="@+id/btnInit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
         android:contentDescription="@string/descriptionBtnOneIntro"
         android:text="@string/start"
         android:textColor="@color/text_on_button_primary"
@@ -47,6 +48,7 @@
         app:backgroundTint="@color/button_primary"
         app:icon="@drawable/ic_btn_intro"
         app:iconTint="@color/text_on_button_primary"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

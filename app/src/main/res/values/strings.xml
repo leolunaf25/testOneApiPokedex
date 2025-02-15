@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Pokedex</string>
-    <string name="choose">Elige la generación</string>
-    <string name="choose_character">Selecciona a un pokémon</string>
+    <string name="choose">Generación</string>
+    <string name="choose_character">Pokédex</string>
 
     //UPDATE STRINGS
     <string name="experience">Experiencia base:</string>
